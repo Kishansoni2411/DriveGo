@@ -1,0 +1,39 @@
+<!-- Include FontAwesome and Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="about-container">
+  <!-- Existing content for About Us page -->
+  <h1>About Us</h1>
+  <p>DriveGo is an online platform for buying and selling cars between users. We aim to provide a seamless and secure car trading experience.</p>
+
+  <hr>
+
+  <!-- Review Form -->
+  <div class="modal-body form_container">
+    <div class="form review_form">
+      <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
+        <h3>Add Your Review</h3>
+
+        <div class="input_box">
+          <input type="number" id="rating" placeholder="Enter your rating (1-5)" formControlName="rating" aria-label="Rating" class="form-control">
+          <i class="fa fa-star"></i>
+        </div>
+        <div *ngIf="reviewForm.controls['rating'].touched && reviewForm.controls['rating'].invalid" class="text-danger">
+          <span *ngIf="reviewForm.controls['rating'].hasError('required')">Rating is required.</span>
+          <span *ngIf="reviewForm.controls['rating'].hasError('min')">Rating must be at least 1.</span>
+          <span *ngIf="reviewForm.controls['rating'].hasError('max')">Rating cannot be more than 5.</span>
+        </div>
+
+        <div class="input_box">
+          <textarea id="description" placeholder="Enter your review" formControlName="description" aria-label="Description" class="form-control"></textarea>
+          <i class="fa fa-comment"></i>
+        </div>
+        <div *ngIf="reviewForm.controls['description'].touched && reviewForm.controls['description'].invalid" class="text-danger">
+          <span *ngIf="reviewForm.controls['description'].hasError('required')">Description is required.</span>
+        </div>
+
+        <button type="submit" class="button" [disabled]="reviewForm.invalid">Submit Review</button>
+      </form>
+    </div>
+  </div>
+</div>

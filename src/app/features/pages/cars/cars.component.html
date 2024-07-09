@@ -1,0 +1,40 @@
+<div class="container mt-5 ">
+    <h1 class="mb-4">Cars</h1>
+
+    <!-- Search bar -->
+    <div class="input-group mb-3">
+        <input type="text" class="form-control flex-grow-1" placeholder="Search cars..." [(ngModel)]="searchText"
+            (input)="filterCars()">
+        <div class="input-group-append w-25 ms-1">
+            <label for="carTypeSelect">Car Type</label>
+            <select id="carTypeSelect" class="form-control" [(ngModel)]="selectedType" (change)="filterCars()">
+                <option value="">All Types</option>
+                <option value="SUV">SUV</option>
+                <option value="Sedan">Sedan</option>
+                <option value="Truck">Truck</option>
+                <option value="Coupe">Coupe</option>
+                <!-- Add other car types as necessary -->
+            </select>
+
+        </div>
+    </div>
+
+    <!-- Car list -->
+    <div class="row" infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300"
+        (scrolled)="onScroll()">
+        <div class="col-lg-3 col-md-4 mb-4" *ngFor="let car of displayedCars">
+            <div class="card h-100" title="{{ car.description }}">
+                <img [src]="car.imageUrl" class="card-img-top" alt="{{ car.model }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ car.model }}</h5>
+                    <p class="card-text">{{ car.company }} - {{ car.year }}</p>
+                    <p class="card-text"><strong>Price: ₹{{ car.price }}</strong></p>
+                    <div class="mt-auto">
+                        <button class="btn btn-primary mt-2" (click)="goToCarDetails(car.carId)">Show More
+                            Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

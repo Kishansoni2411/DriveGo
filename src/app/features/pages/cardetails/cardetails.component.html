@@ -1,0 +1,57 @@
+<!-- cardetails.component.html -->
+<div *ngIf="error" class="error">
+    {{ error }}
+</div>
+
+<div *ngIf="car" class="car-details-container">
+    <div class="car-header">
+        <h1>{{ car.model }} ({{ car.year }})</h1>
+        <h2>{{ car.company }} - {{ car.carType }}</h2>
+    </div>
+
+    <div class="car-content">
+        <div class="car-image-container">
+            <img [src]="car.imageUrl" alt="{{ car.model }}" class="car-image">
+        </div>
+        <div class="car-info">
+            <h2>Details</h2>
+            <ul>
+                <li><strong>Vehicle Number:</strong> {{ car.vehicleNumber }}</li>
+                <li><strong>Gear Type:</strong> {{ car.gearType }}</li>
+                <li><strong>Fuel Type:</strong> {{ car.fuelType }}</li>
+                <li><strong>Seat:</strong> {{ car.seat }}</li>
+                <li><strong>Color:</strong> {{ car.color }}</li>
+                <li><strong>Price:</strong> {{ car.price | currency }}</li>
+                <li><strong>Mileage:</strong> {{ car.mileage | number }}</li>
+                <li><strong>Status:</strong> {{ car.status }}</li>
+            </ul>
+            <h2>Description</h2>
+            <p>{{ car.description }}</p>
+        </div>
+    </div>
+
+    <div class="car-footer">
+        <h2>Contact Options</h2>
+        <div class="contact-options">
+            <button class="styled-button" (click)="toggleOwnerContact()">Owner Contact Details</button>
+            <div *ngIf="showOwnerContact" class="contact-info">
+                <p *ngIf="owner"><strong>Phone:</strong> {{ owner.phoneNumber }}</p>
+                <p *ngIf="owner"><strong>Email:</strong> <a
+                        [href]="'mailto:' + owner.userEmail">{{ owner.userEmail }}</a></p>
+                <p *ngIf="!owner">Loading owner details...</p>
+            </div>
+
+            <button class="styled-button" (click)="toggleLocationDetails()">Location Details</button>
+            <div *ngIf="showLocationDetails" class="contact-info">
+                <p><strong>Address:</strong></p>
+                <!-- {{ owner.address  }} -->
+            </div>
+
+            <button class="styled-button" (click)="toggleMessageInput()">Message</button>
+            <div *ngIf="showMessageInput" class="contact-info">
+                <textarea [(ngModel)]="messageText" rows="4" placeholder="Enter your message here"></textarea>
+                <button class="styled-button" (click)="sendMessage()">Send Message</button>
+            </div>
+        </div>
+    </div>
+</div>

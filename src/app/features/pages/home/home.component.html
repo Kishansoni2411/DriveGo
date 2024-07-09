@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive Go - Buy and Sell Cars Online</title>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    
+    <!-- <div class="container-fluid hero-section"> -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" *ngFor="let image of images; let i = index" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i" [class.active]="i === 0" [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)"></button>
+            </div>
+            <div class="carousel-inner image">
+                <div *ngFor="let image of images; let i = index" class="carousel-item" [class.active]="i === 0">
+                    <img [src]="image" class="d-block w-100" [alt]="'Slide ' + (i + 1)">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>Welcome to Drive Go</h1>
+                        <h3>Your trusted platform to buy and sell cars directly from other customers</h3>
+                       
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    <!-- </div> -->
+   
+
+    <section class="featured-cars">
+        <div class="container">
+            <h2 class="section-title">Featured Listings</h2>
+            <div class="car-grid">
+                <div class="car-card">
+                    <img src="assets/Photos/heroImg4.jpg" alt="Luxury Sedan" class="car-image">
+                    <h3 class="car-title">Luxury Sedan</h3>
+                    <p class="car-description">Premium comfort and performance.</p>
+                    <a class="car-button" href="/cars/sedan">View Details</a>
+                </div>
+                <div class="car-card">
+                    <img src="assets/Photos/heroImg4.jpg" alt="Spacious SUV" class="car-image">
+                    <h3 class="car-title">Spacious SUV</h3>
+                    <p class="car-description">Perfect for family adventures.</p>
+                    <a class="car-button" href="/cars/suv">View Details</a>
+                </div>
+                <div class="car-card">
+                    <img src="assets/Photos/heroImg4.jpg" alt="Sporty Coupe" class="car-image">
+                    <h3 class="car-title">Sporty Coupe</h3>
+                    <p class="car-description">Experience thrill and style.</p>
+                    <a class="car-button" href="/cars/sport">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Why Choose Drive Go?</h2>
+            <div class="benefit-grid">
+                <div class="benefit-item">
+                    <i class="fas fa-handshake benefit-icon"></i>
+                    <h3 class="benefit-title">Direct Transactions</h3>
+                    <p class="benefit-description">Buy and sell directly with other customers.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-tags benefit-icon"></i>
+                    <h3 class="benefit-title">Best Deals</h3>
+                    <p class="benefit-description">No brokerage fees means more savings.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-thumbs-up benefit-icon"></i>
+                    <h3 class="benefit-title">Verified Listings</h3>
+                    <p class="benefit-description">We ensure the quality and authenticity of each listing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-item">
+                    <img src="assets/testimonials/customer1.jpg" alt="Customer" class="testimonial-image">
+                    <p class="testimonial-text">"Drive Go helped me sell my car quickly and without any hassle. Highly recommend!"</p>
+                    <h3 class="testimonial-name">John Doe</h3>
+                </div>
+                <div class="testimonial-item">
+                    <img src="assets/testimonials/customer2.jpg" alt="Customer" class="testimonial-image">
+                    <p class="testimonial-text">"I found my dream car at a great price. No middlemen, just great service!"</p>
+                    <h3 class="testimonial-name">Jane Smith</h3>
+                </div>
+                <div class="testimonial-item">
+                    <img src="assets/testimonials/customer3.jpg" alt="Customer" class="testimonial-image">
+                    <p class="testimonial-text">"Fantastic platform for car enthusiasts looking to buy or sell without brokerage fees."</p>
+                    <h3 class="testimonial-name">Emily Johnson</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Join the Drive Go Community</h2>
+            <p class="cta-subtitle">Start buying or selling your car with ease and confidence.</p>
+            <a class="cta-button" href="/signup">Sign Up Now</a>
+        </div>
+    </section>
+</body>
+</html>

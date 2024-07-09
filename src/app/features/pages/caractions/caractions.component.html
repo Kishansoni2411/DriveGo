@@ -1,0 +1,163 @@
+<div class="container mt-5">
+    <h2 *ngIf="isUpdateMode">Update Car</h2>
+    <h2 *ngIf="!isUpdateMode">Add New Car</h2>
+    <form [formGroup]="addCarForm" (ngSubmit)="addOrUpdateCar()" class="row g-3">
+        <!-- Car Type Dropdown -->
+        <div class="col-md-6">
+            <label for="carType" class="form-label">Car Type</label>
+            <select id="carType" formControlName="carType" class="form-control">
+                <option value="">Select Car Type</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Truck">Truck</option>
+                <option value="Coupe">Coupe</option>
+                <option value="Convertible">Convertible</option>
+                <option value="Hatchback">Hatchback</option>
+                <option value="Van">Van</option>
+                <option value="Other">Other</option>
+            </select>
+            <div *ngIf="addCarForm.controls['carType'].touched && addCarForm.controls['carType'].invalid" class="text-danger">
+                <span *ngIf="addCarForm.controls['carType'].hasError('required')">Car Type is required.</span>
+            </div>
+        </div>
+
+        <!-- Company Input -->
+        <div class="col-md-6">
+            <label for="company" class="form-label">Company</label>
+            <input type="text" id="company" formControlName="company" class="form-control">
+            <div *ngIf="addCarForm.controls['company'].touched && addCarForm.controls['company'].invalid" class="text-danger">
+                <span *ngIf="addCarForm.controls['company'].hasError('required')">Company is required.</span>
+            </div>
+        </div>
+
+        <!-- Model Input -->
+        <div class="col-md-6">
+            <label for="model" class="form-label">Model</label>
+            <input type="text" id="model" formControlName="model" class="form-control">
+            <div *ngIf="addCarForm.controls['model'].touched && addCarForm.controls['model'].invalid" class="text-danger">
+                <span *ngIf="addCarForm.controls['model'].hasError('required')">Model is required.</span>
+            </div>
+        </div>
+
+        <!-- Year Input -->
+        <div class="col-md-6">
+            <label for="year" class="form-label">Year</label>
+            <input type="number" id="year" formControlName="year" class="form-control">
+            <div *ngIf="addCarForm.controls['year'].touched && addCarForm.controls['year'].invalid" class="text-danger">
+                <span *ngIf="addCarForm.controls['year'].hasError('required')">Year is required.</span>
+                <span *ngIf="addCarForm.controls['year'].hasError('min')">Year must be greater than 1900.</span>
+                <span *ngIf="addCarForm.controls['year'].hasError('max')">Year cannot be in the future.</span>
+            </div>
+        </div>
+
+        <!-- Color Input -->
+        <div class="col-md-6">
+            <label for="color" class="form-label">Color</label>
+            <input type="text" id="color" formControlName="color" class="form-control">
+        </div>
+
+        <!-- Price Input -->
+        <div class="col-md-6">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" id="price" formControlName="price" class="form-control">
+            <div *ngIf="addCarForm.controls['price'].touched && addCarForm.controls['price'].invalid" class="text-danger">
+                <span *ngIf="addCarForm.controls['price'].hasError('required')">Price is required.</span>
+                <span *ngIf="addCarForm.controls['price'].hasError('min')">Price must be a positive number.</span>
+            </div>
+        </div>
+
+        <!-- Mileage Input -->
+        <div class="col-md-6">
+            <label for="mileage" class="form-label">Mileage</label>
+            <input type="number" id="mileage" formControlName="mileage" class="form-control">
+            <div *ngIf="addCarForm.controls['mileage'].touched && addCarForm.controls['mileage'].invalid" class="text-danger">
+                <span *ngIf="addCarForm.controls['mileage'].hasError('required')">Mileage is required.</span>
+                <span *ngIf="addCarForm.controls['mileage'].hasError('min')">Mileage must be a positive number.</span>
+            </div>
+        </div>
+
+        <!-- Vehicle Number Input -->
+        <div class="col-md-6">
+            <label for="vehicleNumber" class="form-label">Vehicle Number</label>
+            <input type="text" id="vehicleNumber" formControlName="vehicleNumber" class="form-control">
+            <div *ngIf="addCarForm.controls['vehicleNumber'].touched && addCarForm.controls['vehicleNumber'].invalid" class="text-danger">
+                <span *ngIf="addCarForm.controls['vehicleNumber'].hasError('required')">Vehicle Number is required.</span>
+            </div>
+        </div>
+
+        <!-- Gear Type Dropdown -->
+        <div class="col-md-6">
+            <label for="gearType" class="form-label">Gear Type</label>
+            <select id="gearType" formControlName="gearType" class="form-control">
+                <option value="">Select Gear Type</option>
+                <option value="Automatic">Automatic</option>
+                <option value="Manual">Manual</option>
+                <option value="Semi-Automatic">Semi-Automatic</option>
+            </select>
+            <div *ngIf="addCarForm.controls['gearType'].touched && addCarForm.controls['gearType'].invalid" class="text-danger">
+                <span *ngIf="addCarForm.controls['gearType'].hasError('required')">Gear Type is required.</span>
+            </div>
+        </div>
+
+        <!-- Fuel Type Dropdown -->
+        <div class="col-md-6">
+            <label for="fuelType" class="form-label">Fuel Type</label>
+            <select id="fuelType" formControlName="fuelType" class="form-control">
+                <option value="">Select Fuel Type</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="CNG">CNG</option>
+            </select>
+            <div *ngIf="addCarForm.controls['fuelType'].touched && addCarForm.controls['fuelType'].invalid" class="text-danger">
+                <span *ngIf="addCarForm.controls['fuelType'].hasError('required')">Fuel Type is required.</span>
+            </div>
+        </div>
+
+        <!-- Seat Dropdown -->
+        <div class="col-md-6">
+            <label for="seat" class="form-label">Seats</label>
+            <select id="seat" formControlName="seat" class="form-control">
+                <option value="">Select Number of Seats</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+            <div *ngIf="addCarForm.controls['seat'].touched && addCarForm.controls['seat'].invalid" class="text-danger">
+                <span *ngIf="addCarForm.controls['seat'].hasError('required')">Seats are required.</span>
+                <span *ngIf="addCarForm.controls['seat'].hasError('min')">Seats must be a positive number.</span>
+            </div>
+        </div>
+
+        <!-- Description Textarea -->
+        <div class="col-md-12">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" formControlName="description" class="form-control"></textarea>
+        </div>
+
+        <!-- Image URL Input -->
+        <div class="col-md-6">
+            <label for="imageUrl" class="form-label">Image URL</label>
+            <input type="text" id="imageUrl" formControlName="imageUrl" class="form-control">
+        </div>
+
+        <!-- Status Dropdown -->
+        <div class="col-md-6">
+            <label for="status" class="form-label">Status</label>
+            <select id="status" formControlName="status" class="form-control">
+                <option value="Available">Available</option>
+                <option value="Sold">Sold</option>
+            </select>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="col-md-12 text-center">
+            <button type="reset" class="btn btn-secondary me-2">Reset</button>
+            <button type="submit" class="btn btn-primary" [disabled]="addCarForm.invalid">{{ isUpdateMode ? 'Update Car' : 'Add Car' }}</button>
+            <button *ngIf="isUpdateMode" type="button" class="btn btn-danger ms-2" (click)="deleteCar()">Delete Car</button>
+        </div>
+    </form>
+</div>

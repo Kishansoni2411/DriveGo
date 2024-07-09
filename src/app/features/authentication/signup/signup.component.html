@@ -1,0 +1,79 @@
+<!-- Include FontAwesome and Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="modal-body form_container">
+  <div class="form signup_form">
+    <form [formGroup]="signupForm" (ngSubmit)="signup()">
+      <h2>Sign Up</h2>
+
+      <div class="input_box">
+        <input type="text" id="firstName" placeholder="First Name" formControlName="firstName" class="form-control">
+        <i class="fa fa-user"></i>
+      </div>
+      <div *ngIf="signupForm.controls['firstName'].touched && signupForm.controls['firstName'].invalid" class="text-danger">
+        <span *ngIf="signupForm.controls['firstName'].hasError('required')">First Name is required.</span>
+      </div>
+
+      <div class="input_box">
+        <input type="text" id="lastName" placeholder="Last Name" formControlName="lastName" class="form-control">
+        <i class="fa fa-user"></i>
+      </div>
+      <div *ngIf="signupForm.controls['lastName'].touched && signupForm.controls['lastName'].invalid" class="text-danger">
+        <span *ngIf="signupForm.controls['lastName'].hasError('required')">Last Name is required.</span>
+      </div>
+
+      <div class="input_box">
+        <input type="text" id="username" placeholder="Username" formControlName="username" class="form-control">
+        <i class="fa fa-user"></i>
+      </div>
+      <div *ngIf="signupForm.controls['username'].touched && signupForm.controls['username'].invalid" class="text-danger">
+        <span *ngIf="signupForm.controls['username'].hasError('required')">Username is required.</span>
+        <span *ngIf="signupForm.controls['username'].hasError('minlength')">Username must be at least 4 characters long.</span>
+      </div>
+
+      <div class="input_box">
+        <input type="email" id="email" placeholder="Email" formControlName="email" class="form-control">
+        <i class="fa fa-envelope"></i>
+      </div>
+      <div *ngIf="signupForm.controls['email'].touched && signupForm.controls['email'].invalid" class="text-danger">
+        <span *ngIf="signupForm.controls['email'].hasError('required')">Email is required.</span>
+        <span *ngIf="signupForm.controls['email'].hasError('email')">Enter a valid email address.</span>
+      </div>
+
+      <div class="input_box">
+        <input type="text" id="phoneNumber" placeholder="Phone Number" formControlName="phoneNumber" class="form-control">
+        <i class="fa fa-phone"></i>
+      </div>
+      <div *ngIf="signupForm.controls['phoneNumber'].touched && signupForm.controls['phoneNumber'].invalid" class="text-danger">
+        <span *ngIf="signupForm.controls['phoneNumber'].hasError('required')">Phone number is required.</span>
+        <span *ngIf="signupForm.controls['phoneNumber'].hasError('pattern')">Enter a valid 10-digit phone number.</span>
+      </div>
+      <div class="input_box">
+        <input type="textarea" id="address" placeholder="Address" formControlName="address" class="form-control">
+        <i class="fa fa-home"></i>
+      </div>
+
+      <div class="input_box">
+        <input type="password" id="password" placeholder="Password" formControlName="password" class="form-control">
+        <i class="fa fa-lock"></i>
+      </div>
+      <div *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].invalid" class="text-danger">
+        <span *ngIf="signupForm.controls['password'].hasError('required')">Password is required.</span>
+        <span *ngIf="signupForm.controls['password'].hasError('minlength')">Password must be at least 6 characters long.</span>
+      </div>
+
+      <div class="input_box">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword" class="form-control">
+        <i class="fa fa-lock"></i>
+      </div>
+      <div *ngIf="signupForm.controls['confirmPassword'].touched && signupForm.controls['confirmPassword'].invalid" class="text-danger">
+        <span *ngIf="signupForm.controls['confirmPassword'].hasError('required')">Confirm Password is required.</span>
+        <span *ngIf="signupForm.hasError('passwordMismatch')">Passwords do not match.</span>
+      </div>
+
+      <button type="submit" class="button" [disabled]="signupForm.invalid" >Sign Up</button>
+
+      <div class="login_signup">Already have an account? <a href="#">Login</a></div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,136 @@
+/* Admin Navbar Styles */
+.navbar {
+    background-color: #343a40; /* Dark background for the navbar */
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: #ffffff !important; /* Ensure text is white */
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link.active {
+    color: #007bff !important; /* Blue color for active link */
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+}
+
+.navbar-toggler {
+    border: none; /* Remove default border */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Dropdown Styles */
+.dropdown-menu-dark {
+    background-color: #495057;
+    border: none;
+    border-radius: 10px; /* Rounded corners for dropdown */
+    padding: 10px 0;
+}
+
+.dropdown-item {
+    color: white;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #6c757d;
+}
+
+.dropdown-divider {
+    border-top: 1px solid #6c757d;
+}
+
+/* Button Styles */
+.btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px; /* Rounded border */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.sign {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.sign i {
+    margin-right: 5px;
+}
+
+/* Active Link Style */
+.nav-item .nav-link.active {
+    font-weight: bold;
+    color: #ffffff !important;
+    border-bottom: 2px solid #ffffff; /* Underline for active link */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .navbar-nav .nav-link {
+        color: #ffffff;
+        padding: 10px 15px;
+    }
+
+    .navbar-nav .nav-item {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .navbar-nav .nav-link.active {
+        border-bottom: none;
+        background-color: #007bff;
+        color: white !important;
+        border-radius: 5px;
+    }
+}
+
+/* Add a slight shadow to dropdown items */
+.dropdown-item:hover, .dropdown-item:focus {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effects for Navbar items */
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}

@@ -1,0 +1,69 @@
+<div class="container">
+    <kendo-grid [kendoGridBinding]="gridView" [pageSize]="10" [pageable]="true" [sortable]="true" [resizable]="true"
+        [groupable]="true" [columnMenu]="{ filter: true }"
+        [pageable]="{ pageSizes: [10, 25, 50, 100], buttonCount: 10 }">
+        <ng-template kendoGridToolbarTemplate>
+            <!-- <kendo-textbox
+                [style.width.px]="165"
+                placeholder="Search in all columns..."
+                (valueChange)="onFilter($event)"
+            ></kendo-textbox> -->
+            <kendo-grid-spacer></kendo-grid-spacer>
+            <button kendoGridExcelCommand type="button" [svgIcon]="excelSVG">Export to Excel</button>
+            <button kendoGridPDFCommand [svgIcon]="pdfSVG">Export to PDF</button>
+        </ng-template>
+
+        <kendo-grid-column field="username" title="Username" [width]="150"></kendo-grid-column>
+        <kendo-grid-column field="userEmail" title="Email" [width]="200"></kendo-grid-column>
+        <kendo-grid-column field="phoneNumber" title="Phone Number" [width]="150"></kendo-grid-column>
+        <kendo-grid-column field="address" title="Address" [width]="200"></kendo-grid-column>
+
+
+        <kendo-grid-column field="firstName" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="lastName" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="userId" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="userRoleId" [hidden]="true"></kendo-grid-column>
+
+        <kendo-grid-column title="Action" [width]="120">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <button class="btn btn-primary" (click)="viewUserDetails(dataItem)">View</button>
+            </ng-template>
+        </kendo-grid-column>
+    </kendo-grid>
+</div>
+
+<!-- Modal Template -->
+
+
+
+
+
+<ng-template #userDetailsModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">User Details</h4>
+        <button type="button" class="close ms-auto" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Username:</strong> {{ selectedUser?.username }}</li>
+            <li class="list-group-item"><strong>Email:</strong> {{ selectedUser?.userEmail }}</li>
+            <li class="list-group-item"><strong>Phone Number:</strong> {{ selectedUser?.phoneNumber }}</li>
+            <li class="list-group-item"><strong>Address:</strong> {{ selectedUser?.address }}</li>
+            <li class="list-group-item"><strong>First Name:</strong> {{ selectedUser?.firstName }}</li>
+            <li class="list-group-item"><strong>Last Name:</strong> {{ selectedUser?.lastName }}</li>
+            <li class="list-group-item"><strong>Password:</strong> {{ selectedUser?.password }}</li>
+            <li class="list-group-item"><strong>User ID:</strong> {{ selectedUser?.userId }}</li>
+            <li class="list-group-item"><strong>User Role:</strong> 
+                <span *ngIf="selectedUser?.userRoleId === 0">Admin</span>
+                <span *ngIf="selectedUser?.userRoleId === 1">User</span>
+            </li>
+           
+            <!-- Include other fields as needed -->
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+    </div>
+</ng-template>

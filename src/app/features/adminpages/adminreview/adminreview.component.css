@@ -1,0 +1,160 @@
+/* General Styles for the Grid Container */
+.k-grid {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+  }
+  
+  /* Toolbar Styles */
+  .k-grid-toolbar {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #dcdcdc;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .k-grid-toolbar kendo-textbox {
+    flex: 1;
+  }
+  
+  .k-grid-toolbar button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .k-grid-toolbar button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Header Styles */
+  .k-header {
+    background-color: #007bff;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+  }
+  
+  .k-header .k-link {
+    color: #ffffff;
+  }
+  
+  .k-header .k-link:hover {
+    color: #ffcc00;
+  }
+  
+  /* Row Styles */
+  .k-grid tbody tr {
+    transition: background-color 0.2s ease;
+  }
+  
+  .k-grid tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Cell Styles */
+  .k-grid td {
+    text-align: center;
+    padding: 10px 5px;
+  }
+  
+  /* Status Column Styles */
+  .k-grid td[data-field="status"] {
+    font-weight: bold;
+  }
+  
+  .k-grid td[data-field="status"] .status-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: #ffffff;
+  }
+  
+  .k-grid td[data-field="status"]:contains("Sold") .status-label {
+    background-color: #dc3545;
+    color: #ffffff;
+  }
+  
+  /* View Button Styles */
+  .view-button {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  
+  .view-button:hover {
+    background-color: #218838;
+  }
+  
+  /* Export Button Styles */
+  .k-grid-toolbar button {
+    display: flex;
+    align-items: center;
+  }
+  
+  .k-grid-toolbar button svg {
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+    fill: #ffffff;
+  }
+  
+  /* Pager Styles */
+  .k-pager-wrap {
+    background-color: #f5f5f5;
+    border-top: 1px solid #dcdcdc;
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  .k-pager-numbers .k-link {
+    color: #007bff;
+  }
+  
+  .k-pager-numbers .k-link:hover {
+    color: #0056b3;
+  }
+  
+  .k-pager-numbers .k-link.k-state-selected {
+    background-color: #007bff;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 5px 10px;
+  }
+  
+  /* Footer Styles */
+  .k-footer-template {
+    background-color: #f5f5f5;
+    padding: 10px;
+    text-align: right;
+    font-weight: bold;
+  }
+  
+  .k-footer-template span {
+    margin-left: 20px;
+  }
+  
+
+
+
+
+
+
+
+  

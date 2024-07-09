@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid m-3">
+        <!-- Logo with brand link -->
+        <div class="justify-content-start ms-5">
+            <a class="navbar-brand" routerLink="/">
+                <img src="assets/Photos/LogoDriveGo.jpeg" alt="DriveGo Logo" height="40">
+            </a>
+        </div>
+
+        <!-- Button to toggle navigation on smaller screens -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Center: Navigation Links -->
+        <div class="collapse navbar-collapse justify-content-center ms-5" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Common Links -->
+                <li class="nav-item me-3">
+                    <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+                </li>
+
+                <!-- User Links (if not logged in or role is user) -->
+                <ng-container *ngIf="!isLoggedIn || role === '1'">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" routerLink="/cars" routerLinkActive="active">Cars</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" routerLink="/listing" routerLinkActive="active">Car Listing</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" routerLink="/chatmessages" routerLinkActive="active">Chat Messages</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" routerLink="/about" routerLinkActive="active">About Us</a>
+                    </li>
+                </ng-container>
+
+                <!-- Admin Links (if logged in and role is admin) -->
+                <ng-container *ngIf="isLoggedIn && role === '0'">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" routerLink="/admin/cars" routerLinkActive="active">Cars</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" routerLink="/admin/users" routerLinkActive="active">Users</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" routerLink="/admin/reviews" routerLinkActive="active">Reviews</a>
+                    </li>
+              
+              
+                </ng-container>
+            </ul>
+        </div>
+
+        <!-- Right Side: Login/Signup or User Dropdown -->
+        <div class="collapse navbar-collapse justify-content-end me-5">
+            <ul class="navbar-nav">
+                <!-- Sign In / Sign Up Buttons (if not logged in) -->
+                <ng-container *ngIf="!isLoggedIn">
+                    <li class="nav-item">
+                        <button class="btn btn-primary me-3" (click)="openModal('login')">
+                            <span class="sign">
+                                <i class="fa fa-sign-in-alt"></i>
+                            </span>
+                            <span class="text">Sign In</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-success me-3" (click)="openModal('signup')">
+                            <span class="sign">
+                                <i class="fas fa-user-plus"></i>
+                            </span>
+                            <span class="text">Sign Up</span>
+                        </button>
+                    </li>
+                </ng-container>
+
+                <!-- User Dropdown (if logged in) -->
+                <ng-container *ngIf="isLoggedIn">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i>
+                            {{ username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown">
+                            <li class="dropdown-item">Username: {{ username }}</li>
+                            <li class="dropdown-item">Role: {{ role }}</li>
+                            <li class="dropdown-item" (click)="profile()">Profile</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                        </ul>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,81 @@
+.navbar {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .navbar .navbar-brand {
+    flex-grow: 1; /* Allows the brand logo to grow, taking up available space */
+  }
+  
+  .navbar .nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  
+  .navbar .nav-link:hover,
+  .navbar .nav-link.active-link {
+    color: #fff;
+  }
+  
+  .navbar .dropdown-menu {
+    background-color: #343a40; /* Dark background for dropdown */
+  }
+  
+  .navbar .dropdown-item {
+    color: rgba(255, 255, 255, 0.75);
+    transition: background-color 0.2s;
+  }
+  
+  .navbar .dropdown-item:hover {
+    background-color: #2c3036;
+    color: #fff;
+  }
+  
+  .btn-login,
+  .btn-signup {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+  }
+  
+  .btn-login:hover,
+  .btn-signup:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Flex properties for alignment */
+  .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .navbar .navbar-collapse {
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+    
+    .navbar .navbar-nav {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  
+    .navbar .nav-link,
+    .btn-login,
+    .btn-signup {
+      padding: 0.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .navbar .navbar-collapse {
+      justify-content: flex-start;
+    }
+  }
+  

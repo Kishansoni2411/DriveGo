@@ -1,0 +1,29 @@
+<div class="container">
+    <kendo-grid [kendoGridBinding]="gridView" [pageSize]="10" [pageable]="true" [sortable]="true" [resizable]="true"
+        [groupable]="true" [columnMenu]="{ filter: true }"
+        [pageable]="{ pageSizes: [10, 25, 50, 100], buttonCount: 10 }">
+        <ng-template kendoGridToolbarTemplate>
+            <!-- <kendo-textbox
+                [style.width.px]="165"
+                placeholder="Search in all columns..."
+                (valueChange)="onFilter($event)"
+            ></kendo-textbox> -->
+            <kendo-grid-spacer></kendo-grid-spacer>
+            <button kendoGridExcelCommand type="button" [svgIcon]="excelSVG">Export to Excel</button>
+            <button kendoGridPDFCommand [svgIcon]="pdfSVG">Export to PDF</button>
+        </ng-template>
+
+        <kendo-grid-column field="userName" title="User Name" [width]="150"></kendo-grid-column>
+        <kendo-grid-column field="rating" title="Rating" [width]="100"></kendo-grid-column>
+        <kendo-grid-column field="description" title="Description" [width]="300"></kendo-grid-column>
+        <kendo-grid-column field="createdAt" title="Created At" [width]="200">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                {{ dataItem.createdAt | date: 'medium' }}
+            </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column field="reviewId" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="userId" [hidden]="true"></kendo-grid-column>
+
+    </kendo-grid>
+</div>

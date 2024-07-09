@@ -1,0 +1,64 @@
+/* Ensure Bootstrap styles are integrated properly */
+
+.navbar-nav .nav-item .nav-link.active {
+    font-weight: bold;
+    color: #ffffff !important;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px; /* Rounded border */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+   
+
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.sign {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.sign i {
+    margin-right: 5px;
+}
+
+.dropdown-menu-dark {
+    background-color: #343a40;
+}
+
+.dropdown-item {
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: #495057;
+}
+
+.dropdown-divider {
+    border-color: #6c757d;
+}

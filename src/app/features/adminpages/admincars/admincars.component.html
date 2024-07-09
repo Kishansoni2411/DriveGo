@@ -1,0 +1,101 @@
+<div class="container">
+    <kendo-grid [kendoGridBinding]="gridView" [pageSize]="10" [pageable]="true" [sortable]="true" [resizable]="true"
+        [groupable]="true" [columnMenu]="{ filter: true }"
+        [pageable]="{ pageSizes: [10, 25, 50, 100], buttonCount: 10 }">
+        <ng-template kendoGridToolbarTemplate>
+            <!-- <kendo-textbox
+      [style.width.px]="165"
+      placeholder="Search in all columns..."
+      (valueChange)="onFilter($event)"
+    ></kendo-textbox> -->
+            <kendo-grid-spacer></kendo-grid-spacer>
+            <button kendoGridExcelCommand type="button" [svgIcon]="excelSVG">Export to Excel</button>
+            <button kendoGridPDFCommand [svgIcon]="pdfSVG">Export to PDF</button>
+        </ng-template>
+
+        <kendo-grid-column field="vehicleNumber" title="Vehicle Number" [width]="150"></kendo-grid-column>
+        <kendo-grid-column field="carType" title="Car Type" [width]="120"></kendo-grid-column>
+        <kendo-grid-column field="company" title="Company" [width]="120"></kendo-grid-column>
+        <kendo-grid-column field="model" title="Model" [width]="120"></kendo-grid-column>
+        <kendo-grid-column field="year" title="Year" [width]="100"></kendo-grid-column>
+        <kendo-grid-column field="price" title="Price" [width]="120"></kendo-grid-column>
+        <kendo-grid-column field="status" title="Status" [width]="120">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span class="status-label">{{ dataItem.status }}</span>
+            </ng-template>
+        </kendo-grid-column>
+
+        <!-- Hidden columns (use the [hidden] attribute) -->
+        <kendo-grid-column field="carId" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="userId" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="gearType" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="fuelType" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="seat" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="color" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="mileage" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-column field="description" [hidden]="true"></kendo-grid-column>
+        <kendo-grid-pdf fileName="Cars.pdf" [repeatHeaders]="true"></kendo-grid-pdf>
+        <kendo-grid-excel fileName="Cars.xlsx"></kendo-grid-excel>
+
+
+        <kendo-grid-column title="Action" [width]="120">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <button class="btn btn-primary" (click)="viewCarDetails(dataItem)">View</button>
+            </ng-template>
+        </kendo-grid-column>
+    </kendo-grid>
+</div>
+
+
+
+
+<!-- Modal Template -->
+<ng-template #carDetailsModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Car Details</h4>
+        <button type="button" class="close ms-auto" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <img [src]="selectedCar?.imageUrl" alt="{{ selectedCar?.model }}" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Vehicle Number:</strong> {{ selectedCar?.vehicleNumber }}</li>
+                    <li class="list-group-item"><strong>Car Type:</strong> {{ selectedCar?.carType }}</li>
+                    <li class="list-group-item"><strong>Company:</strong> {{ selectedCar?.company }}</li>
+                    <li class="list-group-item"><strong>Model:</strong> {{ selectedCar?.model }}</li>
+                    <li class="list-group-item"><strong>Gear Type:</strong> {{ selectedCar?.gearType }}</li>
+                    <li class="list-group-item"><strong>Fuel Type:</strong> {{ selectedCar?.fuelType }}</li>
+                    <li class="list-group-item"><strong>Seat:</strong> {{ selectedCar?.seat }}</li>
+                    <li class="list-group-item"><strong>Year:</strong> {{ selectedCar?.year }}</li>
+                    <li class="list-group-item"><strong>Color:</strong> {{ selectedCar?.color }}</li>
+                    <li class="list-group-item"><strong>Price:</strong> {{ selectedCar?.price }}</li>
+                    <li class="list-group-item"><strong>Mileage:</strong> {{ selectedCar?.mileage }}</li>
+                    <li class="list-group-item"><strong>Status:</strong> {{ selectedCar?.status }}</li>
+                    <li class="list-group-item"><strong>Description:</strong> {{ selectedCar?.description }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="owner-details">
+                    <h5>Owner Details</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Username:</strong> {{ owner?.username }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ owner?.userEmail }}</li>
+                        <li class="list-group-item"><strong>Phone Number:</strong> {{ owner?.phoneNumber }}</li>
+                        <li class="list-group-item"><strong>Address:</strong> {{ owner?.address }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+    </div>
+</ng-template>
