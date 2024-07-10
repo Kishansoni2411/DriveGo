@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AuthenticationService } from '../../../services/authentication.service';
 import { UserModel } from '../../../model/UserModel'; // Adjust the path as needed
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -20,6 +21,7 @@ export class SignupComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,
+    private toaster: ToastrService,
     private authService: AuthenticationService // Inject AuthenticationService
   ) {}
 
@@ -43,7 +45,7 @@ export class SignupComponent implements OnInit {
   };
 
   signup() {
-    alert("Called ..... ");
+    
     console.log(this.signupForm);
     if (this.signupForm.valid) {
       const formValues = this.signupForm.value;
@@ -61,11 +63,12 @@ export class SignupComponent implements OnInit {
       this.authService.signup(user).subscribe(
         (response:any) => {
           console.log('Signup Successful:', response);
+          this.toaster.success('You have successfully signed up!', 'Success');
           // Handle successful signup, perhaps close the modal
           this.close();
         },
         (error:any) => {
-          console.log('Signup Failed:', error);
+          this.toaster.error('There was an error processing your request. Please try again.', 'Error');
           // Handle error (e.g., show error message to the user)
         }
       );

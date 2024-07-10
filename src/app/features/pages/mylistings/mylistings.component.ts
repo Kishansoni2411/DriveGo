@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarService } from '../../../services/cars.service'; // Update the import path based on your project structure
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { provideToastr, ToastrService } from 'ngx-toastr';
 
 interface Car {
   carId: number;
@@ -30,6 +31,7 @@ export class MylistingsComponent implements OnInit {
   cars: Car[] = [];
   userId: number | null = null;
   error: string | null = null;
+  toaster=inject(ToastrService);
 
   constructor(private carService: CarService, private router: Router) {}
 

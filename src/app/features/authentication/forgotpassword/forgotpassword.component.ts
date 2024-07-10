@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -22,7 +23,8 @@ export class ForgotpasswordComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService, // Inject AuthenticationService
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    private toaster: ToastrService
   ) {
     this.forgotPasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
@@ -47,14 +49,17 @@ export class ForgotpasswordComponent {
         (Response:any) => {
           if (Response.exists) {
             // Email exists, proceed to the next step
+            this.toaster.info("OTP Sended  ..","info");
             this.currentStep = 2;
           } else {
             // Email does not exist, show an error message
+            this.toaster.error("Email does not exist..","error");
             this.emailErrorMessage = 'Email does not exist.';
           }
         },
         (error:any) => {
           // Handle error, for example, show a general error message
+          this.toaster.error("An error occurred while validating the email. Please try again later...","error");
           this.emailErrorMessage = 'An error occurred while validating the email. Please try again later.';
         }
       );
@@ -69,16 +74,19 @@ export class ForgotpasswordComponent {
       this.authService.validateOtp(email, otp).subscribe(
         (response:any) => {
           if (response.valid) {
+            this.toaster.info("Reset Password ..","info");
             console.log(response.Message);
             this.currentStep = 3; // Update to next step or action
           } else {
             console.log(response.Message);
-            alert('Invalid OTP');
+            this.toaster.error("Invalid OTP ..","Error");
+           
           }
         },
         (error:any) => {
           console.error('Error:', error);
-          alert('An error occurred while validating the OTP.');
+          this.toaster.error("An error occurred while validating the OTP..","Error");
+         
         }
       );
     }
@@ -92,16 +100,19 @@ export class ForgotpasswordComponent {
       this.authService.resetUserPassword(email , password).subscribe(
         (Response:any) => {
           if (Response.Reset) {
-            alert("Password Updated Successfully ..... ");
+            this.toaster.success("Password Updated Successfully ...","success");
+            this.activeModal.dismiss();
             this.close();
           } else {
             
             this.emailErrorMessage = 'An error occurred while validating the email.';
+            this.toaster.error("An error occurred while validating the email..","Error");
           }
         },
         (error:any) => {
           // Handle error, for example, show a general error message
-          this.emailErrorMessage = 'An error occurred while validating the email. Please try again later.';
+          this.toaster.error("An error occurred while validating the email..","Error");
+          
         }
       );
       

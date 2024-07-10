@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UpatepasswordComponent } from '../upatepassword/upatepassword.component';
+import { ToastrService } from 'ngx-toastr';
 
 interface UserModel {
   userId: number;
@@ -35,7 +36,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private fb: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toaster: ToastrService,
   ) {
     this.profileForm = this.fb.group({
       userId: [{ value: '', disabled: true }],
@@ -100,16 +102,20 @@ export class ProfileComponent implements OnInit {
     if (this.profileForm.valid) {
       this.authService.updateUserDetails(this.profileForm.getRawValue()).subscribe({
         next: () => {
-          alert('Profile updated successfully');
+          this.toaster.success('Profile updated successfully!', 'Success');
+         
           this.isEditing = false;
           this.profileForm.disable();
         },
         error: (error: any) => {
           if (error.status === 409) {
-            this.errorMessage = error.error.Message;  // Specific conflict message from the server
+            this.errorMessage = error.error.Message; 
+            this.toaster.error('Specific conflict Error ..', 'Error'); // Specific conflict message from the server
           } else if (error.status === 404) {
+            this.toaster.error('User not found or update failed.', 'Error');
             this.errorMessage = 'User not found or update failed';
           } else {
+            this.toaster.error('An error occurred while updating the profile.', 'Error');
             this.errorMessage = 'An error occurred while updating the profile';
           }
           console.error(error);
@@ -118,7 +124,7 @@ export class ProfileComponent implements OnInit {
     }
   }
   changePassword(): void {
-    alert("called");
+    
     this.modalService.open(UpatepasswordComponent, { centered: true });
     
   }

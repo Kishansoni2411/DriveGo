@@ -1,0 +1,49 @@
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 1.2rem;
+  }
+  
+  .chart-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  @media (max-width: 767px) {
+    .card-title {
+      font-size: 1.2rem;
+    }
+  
+    .card-text {
+      font-size: 1rem;
+    }
+  
+    .chart-container {
+      padding: 10px;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 991px) {
+    .card-title {
+      font-size: 1.4rem;
+    }
+  
+    .card-text {
+      font-size: 1.1rem;
+    }
+  
+    .chart-container {
+      padding: 15px;
+    }
+  }
+  

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ReviewService } from '../../../services/review.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { ReviewService } from '../../../services/review.service';
 export class AboutComponent {
   reviewForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private reviewService: ReviewService) {}
+  constructor(private fb: FormBuilder, private reviewService: ReviewService , private toaster: ToastrService) {}
 
   ngOnInit() {
     this.reviewForm = this.fb.group({
@@ -30,7 +31,8 @@ export class AboutComponent {
       const userId = localStorage.getItem('userid'); // Retrieve the user ID from local storage
 
       if (!userId) {
-        alert('User ID not found. Please log in.');
+        this.toaster.error("User ID not found. Please log in..","Error");
+        
         return;
       }
 
@@ -38,17 +40,21 @@ export class AboutComponent {
 
       this.reviewService.addReview(review).subscribe(
         (response: any) => {
+          
           console.log('Review submitted successfully', response);
-          alert('Thank you for your review!');
+          this.toaster.info("Thank you for your review!","info");
+         
           this.reviewForm.reset();
         },
         (error: any) => {
           console.error('Failed to submit review', error);
-          alert('Failed to submit review. Please try again.');
+          this.toaster.error("Failed to submit review. Please try again...","Error");
+        
         }
       );
     } else {
-      console.log('Form is invalid');
+      this.toaster.error("Form is invalid","Error");
+     
     }
   }
 }

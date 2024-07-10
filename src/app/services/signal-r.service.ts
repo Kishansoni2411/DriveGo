@@ -7,21 +7,20 @@ import { Observable, Subject } from 'rxjs';
 })
 export class SignalRService {
   private hubConnection: signalR.HubConnection;
-  private messageReceived = new Subject<ChatMessage>();
+  private messageReceived$ = new Subject<ChatMessage>();
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('https://localhost:7043/chatHub', {
-        accessTokenFactory: () => localStorage.getItem('token') ?? '' // Ensure the token is present in localStorage
+        accessTokenFactory: () => localStorage.getItem('token') ?? ''
       })
       .withAutomaticReconnect()
       .build();
 
     this.hubConnection.on('ReceiveMessage', (message: ChatMessage) => {
-      this.messageReceived.next(message); // Broadcast the received message
+      this.messageReceived$.next(message);
     });
 
-    // Handle connection lifecycle events for better debugging and reconnection logic
     this.hubConnection.onclose(error => {
       console.error('SignalR connection closed:', error);
     });
@@ -35,20 +34,23 @@ export class SignalRService {
     });
   }
 
-  // Method to start the SignalR connection
-  startConnection() {
+  startConnection(): void {
     this.hubConnection
       .start()
       .then(() => console.log('SignalR connection started successfully.'))
       .catch(err => console.error('Error starting SignalR connection:', err));
   }
 
-  // Method to listen for incoming messages
   onMessageReceived(): Observable<ChatMessage> {
-    return this.messageReceived.asObservable();
+    return this.messageReceived$.asObservable();
   }
 
-  // Additional methods for sending messages or other interactions can be added here
+  // Method to send message to the server
+  sendMessage(message: ChatMessage): void {
+    this.hubConnection.send('SendMessage', message)
+      .then(() => console.log('Message sent successfully.'))
+      .catch(err => console.error('Error sending message:', err));
+  }
 }
 
 // Define the ChatMessage interface to structure the message data

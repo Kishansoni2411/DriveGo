@@ -15,9 +15,9 @@ import { SignalRService } from './services/signal-r.service';
 
 
 export class AppComponent implements OnInit {
-  constructor(private signalRService: SignalRService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.signalRService.startConnection(); // Start the SignalR connection when the component initializes
+    
   }
 }

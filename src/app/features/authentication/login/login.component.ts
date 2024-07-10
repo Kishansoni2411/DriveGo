@@ -7,6 +7,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { SignupComponent } from '../signup/signup.component';
 import { ForgotpasswordComponent } from '../forgotpassword/forgotpassword.component';
+import { ToastrService } from 'ngx-toastr';
+import { SignalRService } from '../../../services/signal-r.service';
 
 
 
@@ -14,7 +16,7 @@ import { ForgotpasswordComponent } from '../forgotpassword/forgotpassword.compon
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, ReactiveFormsModule],
+  imports: [ CommonModule, ReactiveFormsModule ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -24,7 +26,9 @@ export class LoginComponent {
     private fb: FormBuilder,
     private modalService: NgbModal,
     private router: Router,
-    private authService: AuthenticationService) {}
+    private signalRService: SignalRService,
+    private authService: AuthenticationService,
+    private toaster: ToastrService,) {}
 
     ngOnInit()
     {
@@ -41,13 +45,16 @@ export class LoginComponent {
       this.authService.login(username, password).subscribe(
         (response:any) => {
           console.log('Login successful', response);
+          this.signalRService.startConnection();
           this.activeModal.close();
-          window.location.href = '/'; 
-          // this.router.navigate(['/']); 
+          // window.location.href = '/'; 
+          this.toaster.success("Login successful..","Success");
+          
         },
         (error:any) => {
           console.error('Login failed', error);
-          alert('Login failed. Please check your credentials.');
+          this.toaster.error("Login failed. Please check your credentials..","error");
+          
         }
       );
     } else {

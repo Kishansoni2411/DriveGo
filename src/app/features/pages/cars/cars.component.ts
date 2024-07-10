@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Router } from '@angular/router';
 import { CarService } from '../../../services/cars.service';
+import { ToastrService } from 'ngx-toastr';
 
 interface Car {
   carId: number;
@@ -37,7 +38,7 @@ export class CarComponent implements OnInit {
   currentIndex: number = 0;
   error: string | null = null;
 
-  constructor(private carService: CarService, private router: Router) {}
+  constructor(private carService: CarService, private router: Router ,private toaster: ToastrService) {}
 
   ngOnInit(): void {
     this.fetchCars();
@@ -88,5 +89,7 @@ export class CarComponent implements OnInit {
 
   goToCarDetails(carId: number): void {
     this.router.navigate(['/car-details', carId]);
+    this.toaster.info("Car Details..","info");
+    
   }
 }

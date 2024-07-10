@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CarService, Car } from '../../../services/cars.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -20,12 +21,15 @@ export class CarActionsComponent implements OnInit {
   userId: number | null = null;
   carId: number | null = null;
   isUpdateMode: boolean = false;
+  // toaster=inject(ToastrService);
 
   constructor(
     private fb: FormBuilder,
     private carService: CarService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toaster: ToastrService
+
   ) {}
 
   ngOnInit(): void {
@@ -73,7 +77,8 @@ export class CarActionsComponent implements OnInit {
       },
       (error:any) => {
         console.error('Failed to load car details', error);
-        alert('Failed to load car details. Please try again.');
+        this.toaster.error("Failed to load car details. Please try again.","Error");
+        
       }
     );
   }
@@ -88,7 +93,8 @@ export class CarActionsComponent implements OnInit {
         this.addCar(carData);
       }
     } else {
-      console.log('Form is invalid or user not logged in');
+      this.toaster.error("Form is invalid or user not logged in.","Error");
+      
     }
   }
 
@@ -96,11 +102,15 @@ export class CarActionsComponent implements OnInit {
     this.carService.addCar(carData).subscribe(
       (response:any) => {
         console.log('Car added successfully', response);
+        this.toaster.success("Car has been successfully added","Success");
         this.router.navigate(['/listing']);
+       
+
       },
       (error:any) => {
         console.error('Failed to add car', error);
-        alert('Failed to add car. Please try again.');
+       
+        this.toaster.error("Failed to add car. Please try again.","Error");
       }
     );
   }
@@ -109,11 +119,13 @@ export class CarActionsComponent implements OnInit {
     this.carService.updateCar(carData).subscribe(
       (response:any) => {
         console.log('Car updated successfully', response);
+        this.toaster.success("Car has been successfully updated","Success");
         this.router.navigate(['/listing']);
+        
       },
       (error:any) => {
-        console.error('Failed to update car', error);
-        alert('Failed to update car. Please try again.');
+       
+        this.toaster.error("Failed to add car. Please try again.","Error");
       }
     );
   }
@@ -122,12 +134,15 @@ export class CarActionsComponent implements OnInit {
     if (this.carId !== null && confirm('Are you sure you want to delete this car?')) {
       this.carService.deleteCar(this.carId).subscribe(
         (response:any) => {
-          console.log('Car deleted successfully', response);
+          this.toaster.success("Car has been successfully deleted","Success");
+         
           this.router.navigate(['/listing']);
+          
         },
         (error:any) => {
           console.error('Failed to delete car', error);
-          alert('Failed to delete car. Please try again.');
+          this.toaster.error("Failed to delete car. Please try again.","Error");
+         
         }
       );
     }

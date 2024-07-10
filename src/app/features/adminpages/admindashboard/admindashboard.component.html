@@ -1,1 +1,60 @@
-
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-3">
+        <div class="card text-white bg-primary">
+          <div class="card-body">
+            <h5 class="card-title">Total Cars</h5>
+            <p class="card-text">{{ totalCars }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-3">
+        <div class="card text-white bg-success">
+          <div class="card-body">
+            <h5 class="card-title">Total Users</h5>
+            <p class="card-text">{{ totalUsers }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 mb-3">
+        <div class="card text-white bg-info">
+          <div class="card-body">
+            <h5 class="card-title">Total Reviews</h5>
+            <p class="card-text">{{ totalReviews }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-lg-6 col-md-12 mb-4">
+        <div class="chart-container">
+          <div id="userChart" style="height: 400px;"></div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 mb-4">
+        <div class="chart-container">
+          <div id="carChart" style="height: 400px;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12 mb-4">
+        <div class="chart-container">
+          <div id="carTypeChart" style="height: 400px;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-lg-6 col-md-12 mb-4">
+        <div class="chart-container">
+          <div id="reviewsOverTimeChart" style="height: 400px;"></div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 mb-4">
+        <div class="chart-container">
+          <div id="reviewsByRatingChart" style="height: 400px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

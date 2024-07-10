@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-upatepassword',
@@ -17,7 +18,8 @@ export class UpatepasswordComponent {
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private toaster: ToastrService,
   ) {
     this.passwordForm = this.fb.group({
       currentPassword: ['', Validators.required],
@@ -39,19 +41,22 @@ export class UpatepasswordComponent {
       const userId = localStorage.getItem('userid');
       if (!userId) {
         console.error('User ID not found in local storage');
-        alert('User ID not found. Please log in again.');
+
+       
         return;
       }
   
       const { currentPassword, newPassword } = this.passwordForm.value;
       this.authService.updatePassword(Number(userId), currentPassword, newPassword).subscribe(
         (response: any) => {
+          this.toaster.success('Password updated successfully.', 'Sucess');
           console.log('Password updated successfully', response);
           this.activeModal.close();
         },
         (error: any) => {
           console.error('Password update failed', error);
-          alert('Password update failed. Please try again.');
+          this.toaster.error('Password update failed. Please try again.', 'Error');
+          
         }
       );
     } else {

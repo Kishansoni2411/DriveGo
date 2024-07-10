@@ -9,6 +9,7 @@ import { FormsModule , FormBuilder } from '@angular/forms';
 import { UserModel } from '../../../model/UserModel';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ChatService } from '../../../services/chat.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cardetails',
@@ -31,7 +32,8 @@ export class CarDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private carService: CarService,
     private userService: AuthenticationService,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private toaster: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +50,7 @@ export class CarDetailsComponent implements OnInit {
         }
       },
       (err: any) => {
+        this.toaster.error("Failed to load car details.","Error");
         this.error = 'Failed to load car details';
       }
     );
@@ -57,8 +60,10 @@ export class CarDetailsComponent implements OnInit {
     this.userService.getUserDetails(userId).subscribe(
       (data: UserModel | null) => {
         this.owner = data;
+       
       },
       (err: any) => {
+        this.toaster.error("Failed to load owner details. Please try again...","Error");
         this.error = 'Failed to load owner details';
       }
     );
@@ -84,13 +89,15 @@ export class CarDetailsComponent implements OnInit {
 
   sendMessage(): void {
     if (this.messageText.trim() === '') {
-      alert('Please enter a message.');
+      this.toaster.error("Please enter a message..","error");
+      
       return;
     }
 
     this.senderId = this.getUserIdFromLocalStorage();
     if (this.senderId === null) {
-      alert('User is not authenticated. Please log in to send a message.');
+      this.toaster.error("User is not authenticated. Please log in to send a message..","error");
+      
       return;
     }
 
@@ -102,12 +109,14 @@ export class CarDetailsComponent implements OnInit {
     this.chatService.sendMessage(this.senderId, receiverId, message).subscribe(
       (response: any) => {
         console.log('Message sent successfully:', response);
-        alert('Message sent successfully!');
+        this.toaster.success("Message sent successfully!","Success");
+        
         this.messageText = ''; // Clear message input after successful send
       },
       (error: any) => {
         console.error('Error sending message:', error);
-        alert('Error sending message. Please try again later.');
+        this.toaster.error("Error sending message. Please try again later..","error");
+       
       }
     );
   }
